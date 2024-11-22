@@ -1,0 +1,163 @@
+<!-- Hey you. yes you. you are not suppose to be here. now close this file !!! and open it with chrome !!!!!!!!1 :)-->
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title></title>
+</head>
+<body>
+    <style>
+        body{
+    background-color: rgb(222, 196, 162);
+}
+.hour_input{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    font-size: 30px;
+
+    align-items: center;
+}
+.hour_input input{
+    width: 50px;
+    height: 44px;
+    font-size: larger;
+    text-align: center;
+    border: none;
+}
+h2{
+    text-align: center;
+    color: blue;
+    background-color: rgb(249, 171, 122);
+    padding: 20px;
+    margin-top: 0px;
+}
+.list p{
+    text-align: center;
+    font-size: 30px;
+    margin: 5px;
+}
+a{
+    position: absolute;
+    bottom: 3px;
+}
+
+
+    </style>
+    <H2>CHINESE HOUR CONVERTER</H2>
+    <div class = "hour_input">
+        <input  id="hour" type="number">
+        <p>:</p>
+        <input  id="minute" type="number">
+    </div>
+    <div class = "list">
+        <p id="display"></p>
+        <p id="display2"></p>
+        <p id="display3"></p>
+        <p id="display4"></p>
+
+    </div>
+    <a href="https://t.me/@Grandmaster4347H">Developer</a>
+    <script>const Hour_display1 = document.getElementById("display")
+        const Hour_display2 = document.getElementById("display2")
+        const Hour_display3 = document.getElementById("display3")
+        const Hour_display4 = document.getElementById("display4")
+        const hour = document.getElementById("hour")
+        const minute = document.getElementById("minute")
+        const Numbers = {
+            1:"yí",
+            2:"ér",
+            3:"sān",
+            4:"sì",
+            5:"wǔ",
+            6:"liù",
+            7:"qì",
+            8:"bà",
+            9:"jiǔ",
+            0:"lìng",
+            10:"shí",
+            22:"liǎng"
+        }
+        const i_dont_know_what_to_call_this = {
+            15:"yí kè",
+            30:"bàn(ér kè)",
+            45:"sān kè"
+        }
+        function thi(){
+            Hour_display1.innerText = ""
+            Hour_display2.innerText = ""
+            Hour_display3.innerText = ""
+            Hour_display4.innerText = ""
+            if(Number(hour.value) <= 12 && Number(hour.value)>0 && Number(minute.value) <= 60 && Number(minute.value)>0){
+                Hour_display1.innerText = convert_to_chinese(Number(hour.value),3) + " diǎn " + convert_to_chinese(Number(minute.value)) + " fēn"
+                Hour_display2.innerText = "chā " + convert_to_chinese((60-Number(minute.value))) + " " + convert_to_chinese((Number(hour.value)+1)%12,3) + " diǎn"
+                if(Number(minute.value) == 15 || Number(minute.value) == 30 ||Number(minute.value) == 45){
+                    Hour_display3.innerText = convert_to_chinese(Number(hour.value),3) + " diǎn " + convert_to_chinese(Number(minute.value),1)
+                    Hour_display4.innerText = "chā " + convert_to_chinese((60-Number(minute.value)),1) + " " + convert_to_chinese((Number(hour.value)+1)%12,3) + " diǎn"
+        
+                }
+            }else if (Number(hour.value) <= 12 && Number(hour.value)>0 && Number(minute.value) == 0){
+                Hour_display1.innerText = convert_to_chinese(Number(hour.value),3) + " diǎn " + "zhēng"
+                if(Number(hour.value)== 2){
+                    Hour_display1.innerText = Numbers[22] + " diǎn " + "zhēng"
+                }
+
+                }else if (Number(hour.value) == 0 && Number(minute.value) == 0){
+                Hour_display1.innerText = "Please insert hour and minute that you want to convert in the given place"
+            }
+            else{
+                Hour_display1.innerText = "Please insert hour and minute correctly"
+        
+            }
+        }
+        // sice you are reading this file for a reason. contact me by using this phone NO "0933527173"
+        function convert_to_chinese(num,purpose = 0){
+            res = ""
+            arr = []
+            if(purpose == 1){
+                if(num == 15 || num == 30 || num || 45){
+                    return i_dont_know_what_to_call_this[num]
+                }
+            }
+            for(i of String(num)){
+                arr.push(Number(i))
+            }
+            if (String(num).length == 1){
+                if(arr[0]==2 && purpose == 3){
+                    return Numbers[22]
+                }
+                return Numbers[num]
+            }else if(arr[0] == 1){
+                if(arr[1]==0){
+                    return Numbers[10]
+                }
+                res += Numbers[10]
+                res += Numbers[arr[1]]
+                return res
+            }else{
+                if(arr[1]==0){
+                    return Numbers[arr[0]] + " " + Numbers[10]
+                }
+                res += Numbers[arr[0]]
+                res += Numbers[10] + " "
+                res += Numbers[arr[1]]
+                return res
+            }
+        
+        
+        }
+        
+        setInterval(thi,1000)</script>
+</body>
+</html>
